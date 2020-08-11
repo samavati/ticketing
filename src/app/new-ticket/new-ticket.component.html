@@ -1,0 +1,25 @@
+<h1>ثبت تیکت جدید</h1>
+<form class="container-fluid mt-5" [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-6">
+            <mat-label>عنوان</mat-label>
+            <input matInput formControlName="subject" required>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="col-6">
+            <mat-label>اهمیت</mat-label>
+            <mat-select formControlName="importanceLevel" required>
+                <mat-option value="LOW">کم</mat-option>
+                <mat-option value="MEDIUM">متوسط</mat-option>
+                <mat-option value="HIGH">بالا</mat-option>
+                <mat-option value="CRITICAL">خیلی مهم</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="row">
+        <mat-form-field appearance="fill" class="col-12">
+            <mat-label>متن تیکت</mat-label>
+            <textarea matInput style="min-height: 200px;" formControlName="content" required></textarea>
+        </mat-form-field>
+    </div>
+    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">ارسال</button>
+</form>

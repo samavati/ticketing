@@ -1,0 +1,36 @@
+.ticketing-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.ticketing-is-mobile .ticketing-toolbar {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}
+
+h1.ticketing-app-name {
+    margin-right: 8px;
+}
+
+.ticketing-sidenav-container {
+    flex: 1;
+}
+
+.ticketing-is-mobile .ticketing-sidenav-container {
+    flex: 1 0 auto;
+}
+
+.ticketing-sidenav {
+    width: 250px;
+    border: none !important;
+}
+
+.ticketing-content-container {
+    min-height: calc(100vh - 8rem - 64px);
+}

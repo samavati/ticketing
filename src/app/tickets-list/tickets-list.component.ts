@@ -19,7 +19,7 @@ export interface PeriodicElement {
   templateUrl: './tickets-list.component.html',
   styleUrls: ['./tickets-list.component.scss']
 })
-export class TicketsListComponent implements OnInit,AfterViewInit {
+export class TicketsListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['subject', 'createdAt', 'importanceLevel', 'status'];
   dataSource;
 
@@ -35,28 +35,28 @@ export class TicketsListComponent implements OnInit,AfterViewInit {
   constructor(private ticketService: TicketService) { }
 
   ngOnInit() {
-    
+
   }
-  ngAfterViewInit(){
+  ngAfterViewInit() {
     this.makeTheList(1);
     this.onDateRangeChange();
   }
 
   async makeTheList(pageNumber: number) {
     const data: any = await this.ticketService.ticketList(pageNumber, 99999999999, this.dateRange.value.start, this.dateRange.value.end, this.select.value).toPromise();
-    this.dataSource = new MatTableDataSource<PeriodicElement>(data.tickets as PeriodicElement[]);
+    this.dataSource = new MatTableDataSource<PeriodicElement>(data as PeriodicElement[]);
     this.dataSource.paginator = this.paginator;
   }
 
-  onDateRangeChange(){
-    this.dateRange.stateChanges.subscribe(res=>{
+  onDateRangeChange() {
+    this.dateRange.stateChanges.subscribe(res => {
       if (this.range.valid) {
         this.makeTheList(1);
       }
-    })
+    });
   }
 
-  onSelectChange(){
+  onSelectChange() {
     this.makeTheList(1);
   }
 }

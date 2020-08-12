@@ -1,8 +1,8 @@
-import * as moment from 'jalali-moment';
+import { Comment } from './comment.model';
 
 export class Ticket {
     constructor(
-        public ID: string,
+        public ID: number,
         public issuer: string,
         public owner: string,
         public subject: string,
@@ -10,28 +10,8 @@ export class Ticket {
         public metadata: string,
         public importanceLevel: string,
         public status: string,
-        public comments: string,
+        public comments: Comment[] | undefined,
         public createdAt: string,
         public modifiedAt: string,
     ) { }
-
-    jalaaliCreatedAt() {
-        return moment(this.createdAt, 'YYYY-MM-DDTHH:mm:ssZ').locale('fa').format('YYYY/MM/DD HH:mm:ss')
-    }
-
-    persianImportanceLevel() {
-        switch (this.importanceLevel) {
-            case 'LOW':
-                return 'کم';
-            case 'MEDIUM':
-                return 'متوسط';
-            case 'HIGH':
-                return 'بالا';
-            case 'CRITICAL':
-                return 'خیلی مهم';
-
-            default:
-                return '';
-        }
-    }
 }

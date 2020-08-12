@@ -6,13 +6,9 @@ import { TicketService } from '../shared/ticket.service';
 import * as moment from 'jalali-moment';
 import { MatDateRangeInput } from '@angular/material/datepicker';
 import { MatSelect } from '@angular/material/select';
-
-export interface PeriodicElement {
-  createdAt: string;
-  subject: number;
-  importanceLevel: number;
-  status: string;
-}
+import { Ticket } from '../shared/models/ticket.model';
+import { MatDialog } from '@angular/material/dialog';
+import { TicketCommentsComponent } from '../ticket-comments/ticket-comments.component';
 
 @Component({
   selector: 'app-tickets-list',
@@ -32,23 +28,32 @@ export class TicketsListComponent implements OnInit, AfterViewInit {
     end: new FormControl()
   });
 
-  constructor(private ticketService: TicketService) { }
+  constructor(
+    public ticketService: TicketService,
+    public dialog: MatDialog
+  ) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
 
   }
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.makeTheList(1);
     this.onDateRangeChange();
   }
 
-  async makeTheList(pageNumber: number) {
-    const data: any = await this.ticketService.ticketList(pageNumber, 99999999999, this.dateRange.value.start, this.dateRange.value.end, this.select.value).toPromise();
-    this.dataSource = new MatTableDataSource<PeriodicElement>(data as PeriodicElement[]);
+  async makeTheList(pageNumber: number): Promise<void> {
+    const datas = await this.ticketService.ticketList(
+      pageNumber,
+      99999999999,
+      this.dateRange.value.start,
+      this.dateRange.value.end,
+      this.select.value
+    ).toPromise();
+    this.dataSource = new MatTableDataSource<Ticket>(datas);
     this.dataSource.paginator = this.paginator;
   }
 
-  onDateRangeChange() {
+  onDateRangeChange(): void {
     this.dateRange.stateChanges.subscribe(res => {
       if (this.range.valid) {
         this.makeTheList(1);
@@ -56,7 +61,14 @@ export class TicketsListComponent implements OnInit, AfterViewInit {
     });
   }
 
-  onSelectChange() {
+  onSelectChange(): void {
     this.makeTheList(1);
+  }
+
+  openDialog(ticket: Ticket): void {
+    this.dialog.open(TicketCommentsComponent, {
+      width: '100%',
+      data: { ticket }
+    });
   }
 }

@@ -15,13 +15,15 @@ import { MatPaginatorIntl } from '@angular/material/paginator';
 import { getPersianPaginatorIntl } from './shared/persian-paginator-intl';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './shared/material.persian-date.adapter';
+import { TicketCommentsComponent } from './ticket-comments/ticket-comments.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NewTicketComponent,
     SuccessDialogComponent,
-    TicketsListComponent
+    TicketsListComponent,
+    TicketCommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -38,7 +40,10 @@ import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './shared/mater
     { provide: MAT_DATE_FORMATS, useValue: PERSIAN_DATE_FORMATS }
 
   ],
-  entryComponents: [SuccessDialogComponent],
+  entryComponents: [
+    SuccessDialogComponent,
+    TicketCommentsComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

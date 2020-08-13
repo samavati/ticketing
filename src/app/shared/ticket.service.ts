@@ -46,25 +46,6 @@ export class TicketService {
   }
 
   convertPersianToGregorian(persianDate: moment.Moment): string {
-    return moment.from(persianDate.format(), 'fa', 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DDTHH:mm:ssZ');
-  }
-
-  convertGregorianToPersian(gregorianDate: string): string {
-    return moment(gregorianDate, 'YYYY-MM-DDTHH:mm:ssZ').locale('fa').format('YYYY/MM/DD HH:mm:ss');
-  }
-
-  persianImportanceLevel(importanceLevel: string): string {
-    switch (importanceLevel) {
-      case 'LOW':
-        return 'کم';
-      case 'MEDIUM':
-        return 'متوسط';
-      case 'HIGH':
-        return 'بالا';
-      case 'CRITICAL':
-        return 'خیلی مهم';
-      default:
-        return '';
-    }
+    return moment.from(persianDate.format(), 'fa', 'YYYY-MM-DDTHH:mm:ss').format('YYYY-MM-DDTHH:mm:ss');
   }
 }

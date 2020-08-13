@@ -16,6 +16,9 @@ import { getPersianPaginatorIntl } from './shared/persian-paginator-intl';
 import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MaterialPersianDateAdapter, PERSIAN_DATE_FORMATS } from './shared/material.persian-date.adapter';
 import { TicketCommentsComponent } from './ticket-comments/ticket-comments.component';
+import { JalaliPipe } from './shared/pipes/jalali.pipe';
+import { ImportanceLevelPipe } from './shared/pipes/importance-level.pipe';
+import { NewCommentComponent } from './ticket-comments/new-comment/new-comment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { TicketCommentsComponent } from './ticket-comments/ticket-comments.compo
     NewTicketComponent,
     SuccessDialogComponent,
     TicketsListComponent,
-    TicketCommentsComponent
+    TicketCommentsComponent,
+    JalaliPipe,
+    ImportanceLevelPipe,
+    NewCommentComponent
   ],
   imports: [
     BrowserModule,

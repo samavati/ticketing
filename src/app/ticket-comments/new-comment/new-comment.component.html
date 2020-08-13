@@ -1,0 +1,12 @@
+<div class="row">
+    <div class="col-lg-4">
+        <mat-card class="rtl my-comment text-white">
+            {{comment.content}}</mat-card>
+        <div class="d-flex align-items-center my-1 justify-content-end">
+            <small>{{comment.createdAt | jalali}}</small>
+            <mat-spinner diameter="15" class="mx-1" *ngIf="isSending"></mat-spinner>
+            <mat-icon color="primary" *ngIf="isRecieved" class="mx-1">done</mat-icon>
+            <mat-icon color="warn" *ngIf="isFailed" class="mx-1">error</mat-icon>
+        </div>
+    </div>
+</div>

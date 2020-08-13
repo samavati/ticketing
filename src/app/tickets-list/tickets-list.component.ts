@@ -16,7 +16,7 @@ import { TicketCommentsComponent } from '../ticket-comments/ticket-comments.comp
   styleUrls: ['./tickets-list.component.scss']
 })
 export class TicketsListComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['subject', 'createdAt', 'importanceLevel', 'status'];
+  displayedColumns: string[] = ['subject', 'createdAt', 'importanceLevel', 'status', 'view'];
   dataSource;
   isSeraching = true;
 

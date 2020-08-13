@@ -4,7 +4,7 @@
         <div class="col-lg-4">
             <mat-card class="my-comment rtl text-white">{{data.ticket.content}}</mat-card>
             <div>
-                <small>{{ticketService.convertGregorianToPersian(data.ticket.createdAt)}}</small>
+                <small>{{data.ticket.createdAt | jalali}}</small>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
                     [style.background-color]="isSupportComment(comment.owner) ? '#f27e20' : '#2093f2'">
                     {{comment.content}}</mat-card>
                 <div>
-                    <small>{{ticketService.convertGregorianToPersian(comment.createdAt)}}</small>
+                    <small>{{data.ticket.createdAt | jalali}}</small>
                 </div>
             </div>
         </div>
@@ -23,15 +23,16 @@
 
 
     <ng-container *ngFor="let comment of newComments">
-        <div class="row rtl">
+        <!-- <div class="row">
             <div class="col-lg-4">
                 <mat-card class="rtl my-comment text-white">
                     {{comment.content}}</mat-card>
                 <div>
-                    <small>{{ticketService.convertGregorianToPersian(comment.createdAt)}}</small>
+                    <small>{{data.ticket.createdAt | jalali}}</small>
                 </div>
             </div>
-        </div>
+        </div> -->
+        <app-new-comment [comment]="comment" [ticketId]="this.data.ticket.ID"></app-new-comment>
     </ng-container>
 </div>
 <div mat-dialog-actions>
@@ -40,6 +41,6 @@
     </button>
     <mat-form-field appearance="fill" class="col-10">
         <mat-label>متن پیام</mat-label>
-        <textarea matInput (keydown.enter)="onSend()" [formControl]="comment"></textarea>
+        <textarea matInput [formControl]="comment"></textarea>
     </mat-form-field>
 </div>

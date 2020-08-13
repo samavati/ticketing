@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatDialogContent } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Ticket } from '../shared/models/ticket.model';
 import { TicketService } from '../shared/ticket.service';
 import { FormControl } from '@angular/forms';
@@ -43,21 +43,22 @@ export class TicketCommentsComponent implements OnInit, AfterViewInit {
   }
 
   onSend(): void {
-    // this.ticketService.creatComment(this.data.ticket.ID, 'ehsan@jibit.com', this.comment.value)
-    //   .subscribe(res => { });
-    this.newComments.push({
-      ticketID: this.data.ticket.ID,
-      content: this.comment.value as string,
-      owner: '',
-      createdAt: moment().format(),
-      metadata: '',
-      modifiedAt: '',
-    });
-    setTimeout(() => {
-      this.dialogBody.nativeElement.scrollTop = this.dialogBody.nativeElement.scrollHeight;
-    }, 0);
+    if (this.comment.value) {
 
-    this.comment.reset();
+      this.newComments.push({
+        ticketID: this.data.ticket.ID,
+        content: this.comment.value as string,
+        owner: '',
+        createdAt: moment().format(),
+        metadata: '',
+        modifiedAt: '',
+      });
+
+      setTimeout(() => {
+        this.dialogBody.nativeElement.scrollTop = this.dialogBody.nativeElement.scrollHeight;
+      }, 0);
+
+      this.comment.setValue(null);
+    }
   }
-
 }

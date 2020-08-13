@@ -23,23 +23,16 @@
 
 
     <ng-container *ngFor="let comment of newComments">
-        <!-- <div class="row">
-            <div class="col-lg-4">
-                <mat-card class="rtl my-comment text-white">
-                    {{comment.content}}</mat-card>
-                <div>
-                    <small>{{data.ticket.createdAt | jalali}}</small>
-                </div>
-            </div>
-        </div> -->
         <app-new-comment [comment]="comment" [ticketId]="this.data.ticket.ID"></app-new-comment>
     </ng-container>
 </div>
-<div mat-dialog-actions>
-    <button mat-mini-fab color="primary" aria-label="send message" (click)="onSend()">
-        <mat-icon>send</mat-icon>
-    </button>
-    <mat-form-field appearance="fill" class="col-10">
+<div mat-dialog-actions class="row">
+    <div class="col-2">
+        <button mat-mini-fab color="primary" aria-label="send message" (click)="onSend()">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+    <mat-form-field appearance="fill" class="col-10 col-sm-9">
         <mat-label>متن پیام</mat-label>
         <textarea matInput [formControl]="comment"></textarea>
     </mat-form-field>

@@ -1,5 +1,5 @@
 <h1 mat-dialog-title class="rtl">{{data.ticket.subject}}</h1>
-<div mat-dialog-content>
+<div mat-dialog-content #dialogBody>
     <div class="row">
         <div class="col-lg-4">
             <mat-card class="my-comment rtl text-white">{{data.ticket.content}}</mat-card>
@@ -8,10 +8,25 @@
             </div>
         </div>
     </div>
-    <ng-container *ngFor="let comment of data.ticket.comments">
+    <ng-container *ngFor="let comment of comments">
         <div class="row" [style.direction]="isSupportComment(comment.owner) ? 'ltr' : 'rtl'">
             <div class="col-lg-4">
-                <mat-card class="rtl text-white" [style.background-color]="isSupportComment(comment.owner) ? '#f27e20' : '#2093f2'">{{comment.content}}</mat-card>
+                <mat-card class="rtl text-white"
+                    [style.background-color]="isSupportComment(comment.owner) ? '#f27e20' : '#2093f2'">
+                    {{comment.content}}</mat-card>
+                <div>
+                    <small>{{ticketService.convertGregorianToPersian(comment.createdAt)}}</small>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+
+    <ng-container *ngFor="let comment of newComments">
+        <div class="row rtl">
+            <div class="col-lg-4">
+                <mat-card class="rtl my-comment text-white">
+                    {{comment.content}}</mat-card>
                 <div>
                     <small>{{ticketService.convertGregorianToPersian(comment.createdAt)}}</small>
                 </div>
@@ -25,6 +40,6 @@
     </button>
     <mat-form-field appearance="fill" class="col-10">
         <mat-label>متن پیام</mat-label>
-        <textarea matInput [formControl]="comment"></textarea>
+        <textarea matInput (keydown.enter)="onSend()" [formControl]="comment"></textarea>
     </mat-form-field>
 </div>

@@ -21,5 +21,8 @@
             <textarea matInput style="min-height: 200px;" formControlName="content" required></textarea>
         </mat-form-field>
     </div>
-    <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">ارسال</button>
+    <div class="d-flex align-items-center">
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">ارسال</button>
+        <mat-spinner diameter="30" class="mx-3" *ngIf="isSending"></mat-spinner>
+    </div>
 </form>

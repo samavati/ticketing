@@ -18,8 +18,9 @@ import { TicketCommentsComponent } from '../ticket-comments/ticket-comments.comp
 export class TicketsListComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['subject', 'createdAt', 'importanceLevel', 'status'];
   dataSource;
+  isSeraching = true;
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatDateRangeInput, { static: true }) dateRange: MatDateRangeInput<moment.Moment>;
   @ViewChild(MatSelect, { static: true }) select: MatSelect;
 
@@ -42,6 +43,7 @@ export class TicketsListComponent implements OnInit, AfterViewInit {
   }
 
   async makeTheList(pageNumber: number): Promise<void> {
+    this.isSeraching = true;
     const datas = await this.ticketService.ticketList(
       pageNumber,
       99999999999,
@@ -49,6 +51,7 @@ export class TicketsListComponent implements OnInit, AfterViewInit {
       this.dateRange.value.end,
       this.select.value
     ).toPromise();
+    this.isSeraching = false;
     this.dataSource = new MatTableDataSource<Ticket>(datas);
     this.dataSource.paginator = this.paginator;
   }
